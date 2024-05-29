@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using SalesWebMvc.Data;
 namespace SalesWebMvc
 {
@@ -16,15 +17,17 @@ namespace SalesWebMvc
                       ServerVersion.AutoDetect(mySqlConnection)));
 
             // Add services to the container.
-
+            builder.Services.AddScoped<SeedingService>();
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
 
+        
 
             var app = builder.Build();
+           SeedingService seedingService = new SeedingService();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
@@ -32,6 +35,8 @@ namespace SalesWebMvc
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
+                seedservices.Seed();
+                
             }
 
             app.UseHttpsRedirection();
@@ -45,7 +50,11 @@ namespace SalesWebMvc
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
+            
+
+
             app.Run();
         }
+        
     }
 }
