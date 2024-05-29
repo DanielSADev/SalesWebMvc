@@ -5,7 +5,7 @@
 namespace SalesWebMvc.Migrations
 {
     /// <inheritdoc />
-    public partial class mssqlonprem_migration_293 : Migration
+    public partial class mssqlonprem_migration_346 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
